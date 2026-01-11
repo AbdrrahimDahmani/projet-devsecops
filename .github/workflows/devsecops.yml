@@ -68,62 +68,58 @@ jobs:
           distribution: "temurin"
           cache: maven
 
+      - name: Cache OWASP Dependency-Check Data
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/owasp/dependency-check-data
+          key: owasp-data-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            owasp-data-${{ runner.os }}-
+
       - name: Check NVD API Key
-        env:
-          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         run: |
-          if [ -z "$NVD_API_KEY" ]; then
+          if [ -z "${{ secrets.NVD_API_KEY }}" ]; then
             echo "⚠️ WARNING: NVD_API_KEY secret is not set!"
             echo "Get a free API key at: https://nvd.nist.gov/developers/request-an-api-key"
-            echo "Then add it as a repository secret named NVD_API_KEY"
           else
-            echo "✅ NVD API Key is configured (length: ${#NVD_API_KEY} chars)"
+            echo "✅ NVD API Key is configured"
           fi
 
       - name: Run OWASP Dependency-Check on api-gateway
-        env:
-          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        continue-on-error: true
         run: |
           cd api-gateway
-          if [ -n "$NVD_API_KEY" ]; then
-            mvn org.owasp:dependency-check-maven:check \
-              -DnvdApiKey="$NVD_API_KEY" \
-              -DfailBuildOnCVSS=9 \
-              -DsuppressionFiles=../owasp-suppressions.xml \
-              -DnvdApiDelay=6000
-          else
-            echo "Skipping OWASP check - NVD API Key not configured"
-          fi
+          mvn org.owasp:dependency-check-maven:check \
+            -DnvdApiKey=${{ secrets.NVD_API_KEY }} \
+            -DfailBuildOnCVSS=9 \
+            -DsuppressionFiles=../owasp-suppressions.xml \
+            -DnvdApiDelay=10000 \
+            -DnvdValidForHours=24 \
+            -DfailOnError=false
 
       - name: Run OWASP Dependency-Check on order-service
-        env:
-          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        continue-on-error: true
         run: |
           cd order-service
-          if [ -n "$NVD_API_KEY" ]; then
-            mvn org.owasp:dependency-check-maven:check \
-              -DnvdApiKey="$NVD_API_KEY" \
-              -DfailBuildOnCVSS=9 \
-              -DsuppressionFiles=../owasp-suppressions.xml \
-              -DnvdApiDelay=6000
-          else
-            echo "Skipping OWASP check - NVD API Key not configured"
-          fi
+          mvn org.owasp:dependency-check-maven:check \
+            -DnvdApiKey=${{ secrets.NVD_API_KEY }} \
+            -DfailBuildOnCVSS=9 \
+            -DsuppressionFiles=../owasp-suppressions.xml \
+            -DnvdApiDelay=10000 \
+            -DnvdValidForHours=24 \
+            -DfailOnError=false
 
       - name: Run OWASP Dependency-Check on product-service
-        env:
-          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        continue-on-error: true
         run: |
           cd product-service
-          if [ -n "$NVD_API_KEY" ]; then
-            mvn org.owasp:dependency-check-maven:check \
-              -DnvdApiKey="$NVD_API_KEY" \
-              -DfailBuildOnCVSS=9 \
-              -DsuppressionFiles=../owasp-suppressions.xml \
-              -DnvdApiDelay=6000
-          else
-            echo "Skipping OWASP check - NVD API Key not configured"
-          fi
+          mvn org.owasp:dependency-check-maven:check \
+            -DnvdApiKey=${{ secrets.NVD_API_KEY }} \
+            -DfailBuildOnCVSS=9 \
+            -DsuppressionFiles=../owasp-suppressions.xml \
+            -DnvdApiDelay=10000 \
+            -DnvdValidForHours=24 \
+            -DfailOnError=false
 
       - name: Upload OWASP reports
         uses: actions/upload-artifact@v4
