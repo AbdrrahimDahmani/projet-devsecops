@@ -25,8 +25,9 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v7
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_SECRET }}
-        # Optional "hard fail" mode (see next section)
         with:
           args: >
+            -Dsonar.organization=abdrrahimdahmani
+            -Dsonar.projectKey=projet-devsecops
             -Dsonar.qualitygate.wait=true
             -Dsonar.qualitygate.timeout=300
