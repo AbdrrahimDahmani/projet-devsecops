@@ -95,13 +95,13 @@
                 </configuration>
             </plugin>
             
-        <!-- OWASP Dependency Check -->
+        <!-- OWASP Dependency Check (run manually via: mvn dependency-check:check) -->
         <plugin>
             <groupId>org.owasp</groupId>
             <artifactId>dependency-check-maven</artifactId>
             <version>9.0.7</version>
             <configuration>
-                <nvdApiKey>${nvd.api.key}</nvdApiKey>
+                <nvdApiKey>${nvdApiKey}</nvdApiKey>
                 <failBuildOnCVSS>9</failBuildOnCVSS>
             </configuration>
         </plugin>
