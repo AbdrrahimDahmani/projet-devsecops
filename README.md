@@ -1,10 +1,10 @@
-# 🛒 E-Commerce Microservices Platform
+# 🛒 Plateforme E-Commerce Microservices
 
-> A secure, distributed e-commerce application built with microservices architecture, featuring integrated DevSecOps pipeline.
+> Une application e-commerce sécurisée et distribuée, construite avec une architecture microservices et intégrant un pipeline DevSecOps.
 
-[![DevSecOps Pipeline](https://github.com/AbdrrahimDahmani/projet-devsecops/actions/workflows/devsecops.yml/badge.svg)](https://github.com/AbdrrahimDahmani/projet-devsecops/actions/workflows/devsecops.yml)
+[![Pipeline DevSecOps](https://github.com/AbdrrahimDahmani/projet-devsecops/actions/workflows/devsecops.yml/badge.svg)](https://github.com/AbdrrahimDahmani/projet-devsecops/actions/workflows/devsecops.yml)
 
-## 👥 Authors
+## 👥 Auteurs
 
 - **Abdrrahim Dahmani** - [@AbdrrahimDahmani](https://github.com/AbdrrahimDahmani)
 - **Driss Rad** - [@drissrad](https://github.com/drissrad)
@@ -29,162 +29,164 @@
                           │                    │
                           ▼                    ▼
 ┌─────────────────────────────────┐  ┌─────────────────────────────────────┐
-│     PRODUCT SERVICE             │  │     ORDER SERVICE                   │
+│     SERVICE PRODUITS            │  │     SERVICE COMMANDES               │
 │        (Spring Boot)            │  │        (Spring Boot)                │
 │         Port: 8081              │  │         Port: 8082                  │
 │                                 │  │                                     │
 │  ┌─────────────────────────┐    │  │    ┌─────────────────────────┐      │
-│  │   PostgreSQL Products   │    │  │    │   PostgreSQL Orders     │      │
+│  │   PostgreSQL Produits   │    │  │    │   PostgreSQL Commandes  │      │
 │  │       Port: 5432        │    │  │    │        Port: 5433       │      │
 │  └─────────────────────────┘    │  │    └─────────────────────────┘      │
 └─────────────────────────────────┘  └─────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                             KEYCLOAK                                     │
-│                    (Identity & Access Management)                        │
+│                  (Gestion des Identités et Accès)                        │
 │                         Port: 8180                                       │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 🛠️ Tech Stack
+## 🛠️ Stack Technique
 
-| Component | Technology | Port |
-|-----------|-----------|------|
-| Frontend | React 18 + Vite + Keycloak JS | 3000 |
-| API Gateway | Spring Cloud Gateway 3.2 | 8080 |
-| Product Service | Spring Boot 3.2 | 8081 |
-| Order Service | Spring Boot 3.2 | 8082 |
-| Identity Provider | Keycloak 23 | 8180 |
-| Product Database | PostgreSQL 15 | 5432 |
-| Order Database | PostgreSQL 15 | 5433 |
+| Composant              | Technologie                   | Port |
+| ---------------------- | ----------------------------- | ---- |
+| Frontend               | React 18 + Vite + Keycloak JS | 3000 |
+| API Gateway            | Spring Cloud Gateway 3.2      | 8080 |
+| Service Produits       | Spring Boot 3.2               | 8081 |
+| Service Commandes      | Spring Boot 3.2               | 8082 |
+| Fournisseur d'Identité | Keycloak 23                   | 8180 |
+| Base de Données Produits   | PostgreSQL 15             | 5432 |
+| Base de Données Commandes  | PostgreSQL 15             | 5433 |
 
-## 🔐 Security
+## 🔐 Sécurité
 
-### Authentication & Authorization
+### Authentification & Autorisation
+
 - **OAuth2 / OpenID Connect** via Keycloak
-- **JWT Token** propagation between services
-- **Role-based access control** (ADMIN, CLIENT)
+- **Propagation du Token JWT** entre les services
+- **Contrôle d'accès basé sur les rôles** (ADMIN, CLIENT)
 
-### API Permissions
+### Permissions API
 
-| Endpoint | ADMIN | CLIENT |
-|----------|-------|--------|
-| `GET /api/products` | ✅ | ✅ |
-| `GET /api/products/{id}` | ✅ | ✅ |
-| `POST /api/products` | ✅ | ❌ |
-| `PUT /api/products/{id}` | ✅ | ❌ |
-| `DELETE /api/products/{id}` | ✅ | ❌ |
-| `POST /api/orders` | ❌ | ✅ |
-| `GET /api/orders/my-orders` | ❌ | ✅ |
-| `GET /api/orders` | ✅ | ❌ |
+| Endpoint                    | ADMIN | CLIENT |
+| --------------------------- | ----- | ------ |
+| `GET /api/produits`         | ✅    | ✅     |
+| `GET /api/produits/{id}`    | ✅    | ✅     |
+| `POST /api/produits`        | ✅    | ❌     |
+| `PUT /api/produits/{id}`    | ✅    | ❌     |
+| `DELETE /api/produits/{id}` | ✅    | ❌     |
+| `POST /api/commandes`       | ❌    | ✅     |
+| `GET /api/commandes/mes-commandes` | ❌ | ✅  |
+| `GET /api/commandes`        | ✅    | ❌     |
 
-## 🚀 Quick Start
+## 🚀 Démarrage Rapide
 
-### Prerequisites
+### Prérequis
+
 - Docker & Docker Compose
 - Java 17+
 - Node.js 18+
 - Maven 3.8+
 
-### Run with Docker Compose
+### Lancement avec Docker Compose
 
 ```bash
-# Build and start all services
+# Construire et démarrer tous les services
 docker-compose up --build
 
-# Run in background
+# Lancer en arrière-plan
 docker-compose up -d --build
 
-# Stop all services
+# Arrêter tous les services
 docker-compose down
 ```
 
-### Access URLs
+### URLs d'Accès
 
-| Service | URL |
-|---------|-----|
-| Frontend | http://localhost:3000 |
-| API Gateway | http://localhost:8080 |
-| Keycloak Admin | http://localhost:8180/admin |
+| Service             | URL                         |
+| ------------------- | --------------------------- |
+| Frontend            | http://localhost:3000       |
+| API Gateway         | http://localhost:8080       |
+| Admin Keycloak      | http://localhost:8180/admin |
 
-### Test Users
+### Utilisateurs de Test
 
-| User | Password | Role |
-|------|----------|------|
-| admin | admin123 | ADMIN |
-| client | client123 | CLIENT |
+| Utilisateur | Mot de passe | Rôle   |
+| ----------- | ------------ | ------ |
+| admin       | admin123     | ADMIN  |
+| client      | client123    | CLIENT |
 
-Keycloak Admin: `admin` / `admin`
+Admin Keycloak : `admin` / `admin`
 
 ---
 
-## 🔄 DevSecOps Pipeline
+## 🔄 Pipeline DevSecOps
 
-Our CI/CD pipeline runs automatically on every push and pull request to the `main` branch.
+Notre pipeline CI/CD s'exécute automatiquement à chaque push et pull request sur la branche `main`.
 
-### Pipeline Stages
+### Étapes du Pipeline
 
 ```
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│   Build &   │───▶│   OWASP     │───▶│  SonarCloud │───▶│   Docker    │───▶│   Trivy     │
-│    Test     │    │ Dep Check   │    │  Analysis   │    │   Build     │    │   Scan      │
+│  Build &    │───▶│   OWASP     │───▶│  SonarCloud │───▶│   Docker    │───▶│   Trivy     │
+│    Test     │    │ Dep Check   │    │   Analyse   │    │   Build     │    │   Scan      │
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
 
-| Stage | Tool | Purpose |
-|-------|------|---------|
-| **Build & Test** | Maven | Compile and run unit tests |
-| **OWASP Dependency Check** | OWASP DC | Scan dependencies for known CVEs |
-| **SonarCloud Analysis** | SonarCloud | Static code analysis (SAST) |
-| **Docker Build** | Docker | Build container images |
-| **Trivy Security Scan** | Trivy | Container & filesystem vulnerability scanning |
+| Étape                           | Outil      | Objectif                                        |
+| ------------------------------- | ---------- | ----------------------------------------------- |
+| **Build & Test**                | Maven      | Compilation et exécution des tests unitaires    |
+| **OWASP Dependency Check**      | OWASP DC   | Scan des dépendances pour les CVE connues       |
+| **Analyse SonarCloud**          | SonarCloud | Analyse statique du code (SAST)                 |
+| **Build Docker**                | Docker     | Construction des images conteneurs              |
+| **Scan de Sécurité Trivy**      | Trivy      | Scan des vulnérabilités conteneurs & fichiers   |
 
-### Security Tools
+### Outils de Sécurité
 
-| Tool | Type | Description |
-|------|------|-------------|
-| **SonarCloud** | SAST | Static Application Security Testing - code quality & security |
-| **OWASP Dependency-Check** | SCA | Software Composition Analysis - dependency vulnerabilities |
-| **Trivy** | Container/SCA | Comprehensive vulnerability scanner for containers & code |
+| Outil                      | Type          | Description                                                        |
+| -------------------------- | ------------- | ------------------------------------------------------------------ |
+| **SonarCloud**             | SAST          | Test de Sécurité Applicative Statique - qualité & sécurité du code |
+| **OWASP Dependency-Check** | SCA           | Analyse de Composition Logicielle - vulnérabilités des dépendances |
+| **Trivy**                  | Conteneur/SCA | Scanner de vulnérabilités complet pour conteneurs & code           |
 
-### Pipeline Configuration
+### Configuration du Pipeline
 
-The pipeline is defined in [`.github/workflows/devsecops.yml`](.github/workflows/devsecops.yml).
+Le pipeline est défini dans [`.github/workflows/devsecops.yml`](.github/workflows/devsecops.yml).
 
-Security findings are automatically uploaded to **GitHub Security** tab (SARIF format).
+Les résultats de sécurité sont automatiquement téléversés dans l'onglet **GitHub Security** (format SARIF).
 
 ---
 
-## 📁 Project Structure
+## 📁 Structure du Projet
 
 ```
 ├── .github/
 │   └── workflows/
-│       └── devsecops.yml       # CI/CD Pipeline
+│       └── devsecops.yml       # Pipeline CI/CD
 ├── api-gateway/                # Spring Cloud Gateway
-├── product-service/            # Product microservice
-├── order-service/              # Order microservice  
-├── frontend/                   # React application
-├── keycloak/                   # Keycloak realm config
+├── product-service/            # Microservice Produits
+├── order-service/              # Microservice Commandes
+├── frontend/                   # Application React
+├── keycloak/                   # Configuration realm Keycloak
 ├── docs/                       # Documentation
 │   ├── architecture-mermaid.md
 │   ├── api-documentation.md
 │   ├── sequence-diagram.md
 │   └── trivy-reports/
-├── docker-compose.yml          # Docker orchestration
-└── sonar-project.properties    # SonarCloud config
+├── docker-compose.yml          # Orchestration Docker
+└── sonar-project.properties    # Configuration SonarCloud
 ```
 
-## 💻 Local Development
+## 💻 Développement Local
 
-### Run Services Individually
+### Lancer les Services Individuellement
 
 ```bash
-# Product Service
+# Service Produits
 cd product-service
 mvn spring-boot:run
 
-# Order Service
+# Service Commandes
 cd order-service
 mvn spring-boot:run
 
@@ -200,41 +202,41 @@ npm run dev
 
 ---
 
-## 📊 Sequence Diagram - Order Creation
+## 📊 Diagramme de Séquence - Création de Commande
 
 ```
 ┌──────────┐     ┌───────────┐     ┌────────────┐     ┌─────────────┐     ┌─────────────┐
-│  Client  │     │ Keycloak  │     │ API Gateway│     │Order Service│     │Product Svc  │
+│  Client  │     │ Keycloak  │     │ API Gateway│     │Svc Commandes│     │Svc Produits │
 └────┬─────┘     └─────┬─────┘     └──────┬─────┘     └──────┬──────┘     └──────┬──────┘
      │                 │                  │                  │                   │
-     │  1. Login       │                  │                  │                   │
+     │  1. Connexion   │                  │                  │                   │
      │────────────────>│                  │                  │                   │
      │                 │                  │                  │                   │
-     │  2. JWT Token   │                  │                  │                   │
+     │  2. Token JWT   │                  │                  │                   │
      │<────────────────│                  │                  │                   │
      │                 │                  │                  │                   │
-     │  3. POST /api/orders + JWT         │                  │                   │
+     │  3. POST /api/commandes + JWT      │                  │                   │
      │───────────────────────────────────>│                  │                   │
      │                 │                  │                  │                   │
-     │                 │    4. Validate JWT                  │                   │
+     │                 │    4. Valider JWT│                  │                   │
      │                 │<─────────────────│                  │                   │
      │                 │                  │                  │                   │
-     │                 │    5. JWT Valid  │                  │                   │
+     │                 │    5. JWT Valide │                  │                   │
      │                 │─────────────────>│                  │                   │
      │                 │                  │                  │                   │
-     │                 │                  │  6. Forward + JWT│                   │
+     │                 │                  │  6. Transférer+JWT                   │
      │                 │                  │─────────────────>│                   │
      │                 │                  │                  │                   │
-     │                 │                  │                  │ 7. Check stock    │
+     │                 │                  │                  │ 7. Vérifier stock │
      │                 │                  │                  │──────────────────>│
      │                 │                  │                  │                   │
      │                 │                  │                  │ 8. Stock OK       │
      │                 │                  │                  │<──────────────────│
      │                 │                  │                  │                   │
-     │                 │                  │ 9. Order created │                   │
+     │                 │                  │ 9. Commande créée│                   │
      │                 │                  │<─────────────────│                   │
      │                 │                  │                  │                   │
-     │  10. Response   │                  │                  │                   │
+     │  10. Réponse    │                  │                  │                   │
      │<───────────────────────────────────│                  │                   │
 ```
 
@@ -242,15 +244,15 @@ npm run dev
 
 ## 📚 Documentation
 
-- [Architecture Diagrams](docs/architecture-mermaid.md)
-- [API Documentation](docs/api-documentation.md)
-- [Sequence Diagrams](docs/sequence-diagram.md)
-- [DevSecOps Guide](docs/devsecops-guide.md)
+- [Diagrammes d'Architecture](docs/architecture-mermaid.md)
+- [Documentation API](docs/api-documentation.md)
+- [Diagrammes de Séquence](docs/sequence-diagram.md)
+- [Guide DevSecOps](docs/devsecops-guide.md)
 
 ---
 
-## 📄 License
+## 📄 Licence
 
-Academic Project - Secure Distributed Application Development
+Projet Académique - Développement d'Applications Distribuées Sécurisées
 
 **ENSET Mohammedia** - 2025/2026
