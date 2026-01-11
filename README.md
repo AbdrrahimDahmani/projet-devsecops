@@ -1,6 +1,6 @@
 # Application Micro-services Sécurisée
 
-## 🏗️ Architecture
+## Architecture
 
 Application de gestion de produits et commandes basée sur une architecture micro-services sécurisée.
 
@@ -36,19 +36,19 @@ Application de gestion de produits et commandes basée sur une architecture micr
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 📦 Composants
+## Composants
 
-| Composant | Technologie | Port |
-|-----------|-------------|------|
-| Frontend | React 18 + Keycloak JS | 3000 |
-| API Gateway | Spring Cloud Gateway | 8080 |
-| Service Produit | Spring Boot 3.2 | 8081 |
-| Service Commande | Spring Boot 3.2 | 8082 |
-| Keycloak | Keycloak 23 | 8180 |
-| DB Produits | PostgreSQL 15 | 5432 |
-| DB Commandes | PostgreSQL 15 | 5433 |
+| Composant        | Technologie            | Port |
+| ---------------- | ---------------------- | ---- |
+| Frontend         | React 18 + Keycloak JS | 3000 |
+| API Gateway      | Spring Cloud Gateway   | 8080 |
+| Service Produit  | Spring Boot 3.2        | 8081 |
+| Service Commande | Spring Boot 3.2        | 8082 |
+| Keycloak         | Keycloak 23            | 8180 |
+| DB Produits      | PostgreSQL 15          | 5432 |
+| DB Commandes     | PostgreSQL 15          | 5433 |
 
-## 🔐 Sécurité
+## Sécurité
 
 - **Authentification**: OAuth2 / OpenID Connect via Keycloak
 - **Autorisation**: JWT avec rôles ADMIN et CLIENT
@@ -56,20 +56,21 @@ Application de gestion de produits et commandes basée sur une architecture micr
 
 ### Rôles et Permissions
 
-| Endpoint | ADMIN | CLIENT |
-|----------|-------|--------|
-| GET /api/produits | ✅ | ✅ |
-| GET /api/produits/{id} | ✅ | ✅ |
-| POST /api/produits | ✅ | ❌ |
-| PUT /api/produits/{id} | ✅ | ❌ |
-| DELETE /api/produits/{id} | ✅ | ❌ |
-| POST /api/commandes | ❌ | ✅ |
-| GET /api/commandes/mes-commandes | ❌ | ✅ |
-| GET /api/commandes | ✅ | ❌ |
+| Endpoint                         | ADMIN | CLIENT |
+| -------------------------------- | ----- | ------ |
+| GET /api/produits                | Oui   | Oui    |
+| GET /api/produits/{id}           | Oui   | Oui    |
+| POST /api/produits               | Oui   | Non    |
+| PUT /api/produits/{id}           | Oui   | Non    |
+| DELETE /api/produits/{id}        | Oui   | Non    |
+| POST /api/commandes              | Non   | Oui    |
+| GET /api/commandes/mes-commandes | Non   | Oui    |
+| GET /api/commandes               | Oui   | Non    |
 
-## 🚀 Démarrage Rapide
+## Démarrage Rapide
 
 ### Prérequis
+
 - Docker & Docker Compose
 - Java 17+
 - Node.js 18+
@@ -93,12 +94,12 @@ docker-compose up -d --build
 
 ### Utilisateurs de test
 
-| Utilisateur | Mot de passe | Rôle |
-|-------------|--------------|------|
-| admin | admin123 | ADMIN |
-| client | client123 | CLIENT |
+| Utilisateur | Mot de passe | Rôle   |
+| ----------- | ------------ | ------ |
+| admin       | admin123     | ADMIN  |
+| client      | client123    | CLIENT |
 
-## 🛠️ Développement
+## Développement
 
 ### Lancement individuel des services
 
@@ -121,16 +122,16 @@ npm install
 npm start
 ```
 
-## 🔍 DevSecOps
+## DevSecOps
 
 ### Outils intégrés
 
-| Outil | Type | Usage |
-|-------|------|-------|
-| SonarQube | SAST | Analyse statique du code |
-| Trivy | SCA/Container | Scan vulnérabilités dépendances et images Docker |
+| Outil     | Type          | Usage                                            |
+| --------- | ------------- | ------------------------------------------------ |
+| SonarQube | SAST          | Analyse statique du code                         |
+| Trivy     | SCA/Container | Scan vulnérabilités dépendances et images Docker |
 
-### 📊 SonarQube - Analyse Statique
+### SonarQube - Analyse Statique
 
 ```bash
 # Lancer SonarQube (inclus dans docker-compose)
@@ -152,15 +153,17 @@ docker run --rm \
 ```
 
 **Configuration du token:**
+
 1. Se connecter à http://localhost:9000
 2. My Account → Security → Generate Token
 3. Copier le token généré
 
 **Résultats obtenus:**
-- ✅ Product Service: **16 fichiers** analysés
-- ✅ Order Service: **23 fichiers** analysés
 
-### 🔍 Trivy - Scan de Vulnérabilités
+- Product Service: **16 fichiers** analysés
+- Order Service: **23 fichiers** analysés
+
+### Trivy - Scan de Vulnérabilités
 
 ```bash
 # Scan des dépendances d'un service
@@ -187,33 +190,36 @@ docker run --rm \
 
 **Résultats des scans de vulnérabilités:**
 
-| Service | Total | 🔴 Critical | 🟠 High | 🟡 Medium | 🟢 Low |
-|---------|-------|-------------|---------|-----------|--------|
-| product-service | 43 | 3 | 19 | 15 | 6 |
-| order-service | 54 | 3 | 23 | 21 | 7 |
+| Service         | Total | Critical | High | Medium | Low |
+| --------------- | ----- | -------- | ---- | ------ | --- |
+| product-service | 43    | 3        | 19   | 15     | 6   |
+| order-service   | 54    | 3        | 23   | 21     | 7   |
 
 **Vulnérabilités critiques détectées:**
+
 - CVE-2025-24813: Apache Tomcat - Remote Code Execution
 - CVE-2024-1597: PostgreSQL JDBC - SQL Injection
 - CVE-2024-38821: Spring Security WebFlux - Authorization Bypass
 
-### 📁 Rapports DevSecOps
+### Rapports DevSecOps
 
 Les rapports sont générés dans `docs/trivy-reports/`:
+
 - `product-service-trivy.json` - Vulnérabilités dépendances
 - `order-service-trivy.json` - Vulnérabilités dépendances
 - `product-service-docker-trivy.json` - Vulnérabilités image Docker
 
-### 📐 Diagramme d'Architecture
+### Diagramme d'Architecture
 
 Voir [docs/architecture-mermaid.md](docs/architecture-mermaid.md) pour les diagrammes Mermaid complets incluant:
+
 - Vue d'ensemble du système
 - Flux d'authentification OAuth2/OIDC
 - Architecture interne des microservices
 - Diagramme de déploiement Docker
 - Pipeline DevSecOps
 
-## 📊 Diagramme de Séquence - Création de Commande
+## Diagramme de Séquence - Création de Commande
 
 ```
 ┌──────────┐     ┌───────────┐     ┌────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -256,7 +262,7 @@ Voir [docs/architecture-mermaid.md](docs/architecture-mermaid.md) pour les diagr
      │                 │                  │                  │                   │
 ```
 
-## 📁 Structure du Projet
+## Structure du Projet
 
 ```
 Project_System_Distribuer/
@@ -270,6 +276,6 @@ Project_System_Distribuer/
 └── docs/                    # Documentation
 ```
 
-## 📝 Licence
+## Licence
 
 Projet académique - Développement d'applications distribuées sécurisées
