@@ -1,17 +1,17 @@
-# 🛒 Plateforme E-Commerce Microservices
+# Plateforme E-Commerce Microservices
 
 > Une application e-commerce sécurisée et distribuée, construite avec une architecture microservices et intégrant un pipeline DevSecOps.
 
 [![Pipeline DevSecOps](https://github.com/AbdrrahimDahmani/projet-devsecops/actions/workflows/devsecops.yml/badge.svg)](https://github.com/AbdrrahimDahmani/projet-devsecops/actions/workflows/devsecops.yml)
 
-## 👥 Auteurs
+## Auteurs
 
 - **Abdrrahim Dahmani** - [@AbdrrahimDahmani](https://github.com/AbdrrahimDahmani)
 - **Driss Rad** - [@drissrad](https://github.com/drissrad)
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -46,7 +46,7 @@
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 🛠️ Stack Technique
+## Stack Technique
 
 | Composant              | Technologie                   | Port |
 | ---------------------- | ----------------------------- | ---- |
@@ -58,7 +58,7 @@
 | Base de Données Produits   | PostgreSQL 15             | 5432 |
 | Base de Données Commandes  | PostgreSQL 15             | 5433 |
 
-## 🔐 Sécurité
+## Sécurité
 
 ### Authentification & Autorisation
 
@@ -79,7 +79,7 @@
 | `GET /api/commandes/mes-commandes` | ❌ | ✅  |
 | `GET /api/commandes`        | ✅    | ❌     |
 
-## 🚀 Démarrage Rapide
+## Démarrage Rapide
 
 ### Prérequis
 
@@ -120,7 +120,7 @@ Admin Keycloak : `admin` / `admin`
 
 ---
 
-## 🔄 Pipeline DevSecOps
+## Pipeline DevSecOps
 
 Notre pipeline CI/CD s'exécute automatiquement à chaque push et pull request sur la branche `main`.
 
@@ -157,7 +157,7 @@ Les résultats de sécurité sont automatiquement téléversés dans l'onglet **
 
 ---
 
-## 📁 Structure du Projet
+## Structure du Projet
 
 ```
 ├── .github/
@@ -177,7 +177,7 @@ Les résultats de sécurité sont automatiquement téléversés dans l'onglet **
 └── sonar-project.properties    # Configuration SonarCloud
 ```
 
-## 💻 Développement Local
+## Développement Local
 
 ### Lancer les Services Individuellement
 
@@ -202,7 +202,7 @@ npm run dev
 
 ---
 
-## 📊 Diagramme de Séquence - Création de Commande
+## Diagramme de Séquence - Création de Commande
 
 ```
 ┌──────────┐     ┌───────────┐     ┌────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -242,7 +242,7 @@ npm run dev
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 - [Diagrammes d'Architecture](docs/architecture-mermaid.md)
 - [Documentation API](docs/api-documentation.md)
@@ -251,7 +251,7 @@ npm run dev
 
 ---
 
-## 📄 Licence
+## Licence
 
 Projet Académique - Développement d'Applications Distribuées Sécurisées
 
