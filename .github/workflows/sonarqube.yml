@@ -27,7 +27,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_SECRET }}
         with:
           args: >
+            -X
             -Dsonar.organization=abderrahimdahmani
-            -Dsonar.projectKey=projet-devsecops
+            -Dsonar.projectKey=AbdrrahimDahmani_projet-devsecops
             -Dsonar.qualitygate.wait=true
             -Dsonar.qualitygate.timeout=300
