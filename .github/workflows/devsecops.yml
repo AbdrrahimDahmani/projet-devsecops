@@ -71,17 +71,17 @@ jobs:
       - name: Run OWASP Dependency-Check on api-gateway
         run: |
           cd api-gateway
-          mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=9 -DsuppressionFiles=../owasp-suppressions.xml || true
+          mvn org.owasp:dependency-check-maven:check -Dnvd.api.key=${{ secrets.NVD_API_KEY }} -DfailBuildOnCVSS=9 -DsuppressionFiles=../owasp-suppressions.xml || true
 
       - name: Run OWASP Dependency-Check on order-service
         run: |
           cd order-service
-          mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=9 -DsuppressionFiles=../owasp-suppressions.xml || true
+          mvn org.owasp:dependency-check-maven:check -Dnvd.api.key=${{ secrets.NVD_API_KEY }} -DfailBuildOnCVSS=9 -DsuppressionFiles=../owasp-suppressions.xml || true
 
       - name: Run OWASP Dependency-Check on product-service
         run: |
           cd product-service
-          mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=9 -DsuppressionFiles=../owasp-suppressions.xml || true
+          mvn org.owasp:dependency-check-maven:check -Dnvd.api.key=${{ secrets.NVD_API_KEY }} -DfailBuildOnCVSS=9 -DsuppressionFiles=../owasp-suppressions.xml || true
 
       - name: Upload OWASP reports
         uses: actions/upload-artifact@v4
