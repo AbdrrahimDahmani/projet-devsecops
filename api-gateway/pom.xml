@@ -95,12 +95,16 @@
                 </configuration>
             </plugin>
             
-            <!-- OWASP Dependency Check -->
-            <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>9.0.7</version>
-            </plugin>
+        <!-- OWASP Dependency Check -->
+        <plugin>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>9.0.7</version>
+            <configuration>
+                <nvdApiKey>${nvd.api.key}</nvdApiKey>
+                <failBuildOnCVSS>9</failBuildOnCVSS>
+            </configuration>
+        </plugin>
             
             <!-- SonarQube -->
             <plugin>
