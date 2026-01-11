@@ -1,8 +1,8 @@
-version: '3.8'
+version: "3.8"
 
 services:
   # ==================== DATABASES ====================
-  
+
   postgres-product:
     image: postgres:15-alpine
     container_name: postgres-product
@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
 
   # ==================== KEYCLOAK ====================
-  
+
   keycloak:
     image: quay.io/keycloak/keycloak:23.0
     container_name: keycloak
@@ -67,7 +67,11 @@ services:
     networks:
       - ecommerce-network
     healthcheck:
-      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/8080;echo -e \"GET /health/ready HTTP/1.1\r\nhost: localhost\r\nConnection: close\r\n\r\n\" >&3;grep -q '\"status\": \"UP\"' <&3"]
+      test:
+        [
+          "CMD-SHELL",
+          "exec 3<>/dev/tcp/127.0.0.1/8080;echo -e \"GET /health/ready HTTP/1.1\r\nhost: localhost\r\nConnection: close\r\n\r\n\" >&3;grep -q '\"status\": \"UP\"' <&3",
+        ]
       interval: 30s
       timeout: 10s
       retries: 10
@@ -75,7 +79,7 @@ services:
     restart: unless-stopped
 
   # ==================== MICROSERVICES ====================
-  
+
   product-service:
     build:
       context: ./product-service
@@ -98,7 +102,15 @@ services:
       keycloak:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8081/actuator/health"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8081/actuator/health",
+        ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -130,7 +142,15 @@ services:
       product-service:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8082/actuator/health"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8082/actuator/health",
+        ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -138,7 +158,7 @@ services:
     restart: unless-stopped
 
   # ==================== API GATEWAY ====================
-  
+
   api-gateway:
     build:
       context: ./api-gateway
@@ -160,7 +180,15 @@ services:
       order-service:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/actuator/health",
+        ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -168,7 +196,7 @@ services:
     restart: unless-stopped
 
   # ==================== FRONTEND ====================
-  
+
   frontend:
     build:
       context: ./frontend
@@ -187,23 +215,6 @@ services:
       - api-gateway
     restart: unless-stopped
 
-  # ==================== DEVSECOPS ====================
-  
-  sonarqube:
-    image: sonarqube:lts-community
-    container_name: sonarqube
-    environment:
-      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
-    ports:
-      - "9000:9000"
-    networks:
-      - ecommerce-network
-    volumes:
-      - sonarqube-data:/opt/sonarqube/data
-      - sonarqube-logs:/opt/sonarqube/logs
-      - sonarqube-extensions:/opt/sonarqube/extensions
-    restart: unless-stopped
-
 networks:
   ecommerce-network:
     driver: bridge
@@ -211,6 +222,3 @@ networks:
 volumes:
   postgres-product-data:
   postgres-order-data:
-  sonarqube-data:
-  sonarqube-logs:
-  sonarqube-extensions:
