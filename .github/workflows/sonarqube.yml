@@ -28,7 +28,7 @@ jobs:
         with:
           args: >
             -X
-            -Dsonar.organization=abderrahimdahmani
+            -Dsonar.organization=abdrrahimdahmani
             -Dsonar.projectKey=AbdrrahimDahmani_projet-devsecops
             -Dsonar.qualitygate.wait=true
             -Dsonar.qualitygate.timeout=300
