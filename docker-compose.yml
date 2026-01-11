@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_DB: product_db
       POSTGRES_USER: product_user
-      POSTGRES_PASSWORD: product_password
+      POSTGRES_PASSWORD: Enset@2025product_password
     volumes:
       - postgres-product-data:/var/lib/postgresql/data
     ports:
@@ -29,7 +29,7 @@ services:
     environment:
       POSTGRES_DB: order_db
       POSTGRES_USER: order_user
-      POSTGRES_PASSWORD: order_password
+      POSTGRES_PASSWORD: Enset@2025order_password
     volumes:
       - postgres-order-data:/var/lib/postgresql/data
     ports:
@@ -89,7 +89,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-product:5432/product_db
       SPRING_DATASOURCE_USERNAME: product_user
-      SPRING_DATASOURCE_PASSWORD: product_password
+      SPRING_DATASOURCE_PASSWORD: Enset@2025product_password
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://keycloak:8080/realms/ecommerce
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://keycloak:8080/realms/ecommerce/protocol/openid-connect/certs
     ports:
@@ -126,7 +126,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-order:5432/order_db
       SPRING_DATASOURCE_USERNAME: order_user
-      SPRING_DATASOURCE_PASSWORD: order_password
+      SPRING_DATASOURCE_PASSWORD: Enset@2025order_password
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://keycloak:8080/realms/ecommerce
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI: http://keycloak:8080/realms/ecommerce/protocol/openid-connect/certs
       PRODUCT_SERVICE_URL: http://product-service:8081
