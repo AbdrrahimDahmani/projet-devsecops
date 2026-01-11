@@ -22,7 +22,7 @@ jobs:
       # - run: npm ci && npm test
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v7
+        uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_SECRET }}
         with:
