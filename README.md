@@ -7,7 +7,7 @@
 ## Auteurs
 
 - **Abdrrahim Dahmani** - [@AbdrrahimDahmani](https://github.com/AbdrrahimDahmani)
-- **Driss Rad** - [@drissrad](https://github.com/drissrad)
+- **Driss Ait Maali** - [@drissrad](https://github.com/drissrad)
 
 ---
 
@@ -48,15 +48,15 @@
 
 ## Stack Technique
 
-| Composant              | Technologie                   | Port |
-| ---------------------- | ----------------------------- | ---- |
-| Frontend               | React 18 + Vite + Keycloak JS | 3000 |
-| API Gateway            | Spring Cloud Gateway 3.2      | 8080 |
-| Service Produits       | Spring Boot 3.2               | 8081 |
-| Service Commandes      | Spring Boot 3.2               | 8082 |
-| Fournisseur d'Identité | Keycloak 23                   | 8180 |
-| Base de Données Produits   | PostgreSQL 15             | 5432 |
-| Base de Données Commandes  | PostgreSQL 15             | 5433 |
+| Composant                 | Technologie                   | Port |
+| ------------------------- | ----------------------------- | ---- |
+| Frontend                  | React 18 + Vite + Keycloak JS | 3000 |
+| API Gateway               | Spring Cloud Gateway 3.2      | 8080 |
+| Service Produits          | Spring Boot 3.2               | 8081 |
+| Service Commandes         | Spring Boot 3.2               | 8082 |
+| Fournisseur d'Identité    | Keycloak 23                   | 8180 |
+| Base de Données Produits  | PostgreSQL 15                 | 5432 |
+| Base de Données Commandes | PostgreSQL 15                 | 5433 |
 
 ## Sécurité
 
@@ -68,16 +68,16 @@
 
 ### Permissions API
 
-| Endpoint                    | ADMIN | CLIENT |
-| --------------------------- | ----- | ------ |
-| `GET /api/produits`         | ✅    | ✅     |
-| `GET /api/produits/{id}`    | ✅    | ✅     |
-| `POST /api/produits`        | ✅    | ❌     |
-| `PUT /api/produits/{id}`    | ✅    | ❌     |
-| `DELETE /api/produits/{id}` | ✅    | ❌     |
-| `POST /api/commandes`       | ❌    | ✅     |
-| `GET /api/commandes/mes-commandes` | ❌ | ✅  |
-| `GET /api/commandes`        | ✅    | ❌     |
+| Endpoint                           | ADMIN | CLIENT |
+| ---------------------------------- | ----- | ------ |
+| `GET /api/produits`                | ✅    | ✅     |
+| `GET /api/produits/{id}`           | ✅    | ✅     |
+| `POST /api/produits`               | ✅    | ❌     |
+| `PUT /api/produits/{id}`           | ✅    | ❌     |
+| `DELETE /api/produits/{id}`        | ✅    | ❌     |
+| `POST /api/commandes`              | ❌    | ✅     |
+| `GET /api/commandes/mes-commandes` | ❌    | ✅     |
+| `GET /api/commandes`               | ✅    | ❌     |
 
 ## Démarrage Rapide
 
@@ -103,11 +103,11 @@ docker-compose down
 
 ### URLs d'Accès
 
-| Service             | URL                         |
-| ------------------- | --------------------------- |
-| Frontend            | http://localhost:3000       |
-| API Gateway         | http://localhost:8080       |
-| Admin Keycloak      | http://localhost:8180/admin |
+| Service        | URL                         |
+| -------------- | --------------------------- |
+| Frontend       | http://localhost:3000       |
+| API Gateway    | http://localhost:8080       |
+| Admin Keycloak | http://localhost:8180/admin |
 
 ### Utilisateurs de Test
 
@@ -133,13 +133,13 @@ Notre pipeline CI/CD s'exécute automatiquement à chaque push et pull request s
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
 
-| Étape                           | Outil      | Objectif                                        |
-| ------------------------------- | ---------- | ----------------------------------------------- |
-| **Build & Test**                | Maven      | Compilation et exécution des tests unitaires    |
-| **OWASP Dependency Check**      | OWASP DC   | Scan des dépendances pour les CVE connues       |
-| **Analyse SonarCloud**          | SonarCloud | Analyse statique du code (SAST)                 |
-| **Build Docker**                | Docker     | Construction des images conteneurs              |
-| **Scan de Sécurité Trivy**      | Trivy      | Scan des vulnérabilités conteneurs & fichiers   |
+| Étape                      | Outil      | Objectif                                      |
+| -------------------------- | ---------- | --------------------------------------------- |
+| **Build & Test**           | Maven      | Compilation et exécution des tests unitaires  |
+| **OWASP Dependency Check** | OWASP DC   | Scan des dépendances pour les CVE connues     |
+| **Analyse SonarCloud**     | SonarCloud | Analyse statique du code (SAST)               |
+| **Build Docker**           | Docker     | Construction des images conteneurs            |
+| **Scan de Sécurité Trivy** | Trivy      | Scan des vulnérabilités conteneurs & fichiers |
 
 ### Outils de Sécurité
 
