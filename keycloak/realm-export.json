@@ -1,0 +1,154 @@
+{
+  "realm": "ecommerce",
+  "enabled": true,
+  "displayName": "E-Commerce Application",
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "ADMIN",
+        "description": "Administrateur - Accès complet à l'application"
+      },
+      {
+        "name": "CLIENT",
+        "description": "Client - Peut consulter les produits et créer des commandes"
+      }
+    ]
+  },
+  "users": [
+    {
+      "username": "admin",
+      "email": "admin@ecommerce.com",
+      "firstName": "Admin",
+      "lastName": "User",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["ADMIN"]
+    },
+    {
+      "username": "client",
+      "email": "client@ecommerce.com",
+      "firstName": "Client",
+      "lastName": "User",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "client123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["CLIENT"]
+    },
+    {
+      "username": "jean.dupont",
+      "email": "jean.dupont@email.com",
+      "firstName": "Jean",
+      "lastName": "Dupont",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "client123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["CLIENT"]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "ecommerce-frontend",
+      "name": "E-Commerce Frontend",
+      "description": "Application React Frontend",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "authorizationServicesEnabled": false,
+      "protocol": "openid-connect",
+      "rootUrl": "http://localhost:3000",
+      "baseUrl": "/",
+      "redirectUris": [
+        "http://localhost:3000/*",
+        "http://frontend:3000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000",
+        "http://frontend:3000",
+        "http://localhost:8080",
+        "+"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      },
+      "defaultClientScopes": [
+        "web-origins",
+        "profile",
+        "roles",
+        "email"
+      ]
+    },
+    {
+      "clientId": "ecommerce-api",
+      "name": "E-Commerce API",
+      "description": "Backend API Services",
+      "enabled": true,
+      "publicClient": false,
+      "bearerOnly": true,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "protocol": "openid-connect"
+    }
+  ],
+  "clientScopes": [
+    {
+      "name": "roles",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true"
+      },
+      "protocolMappers": [
+        {
+          "name": "realm roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "user.attribute": "foo",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "realm_access.roles",
+            "jsonType.label": "String"
+          }
+        }
+      ]
+    }
+  ],
+  "accessTokenLifespan": 300,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+  "accessCodeLifespan": 60,
+  "accessCodeLifespanUserAction": 300,
+  "accessCodeLifespanLogin": 1800
+}

@@ -1,0 +1,44 @@
+# Fichiers générés
+node_modules/
+target/
+build/
+dist/
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env.local
+.env.*.local
+
+# Rapports de sécurité
+devsecops/reports/
+
+# Docker
+*.tar
+
+# Dépendances Maven
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Compilation
+*.class
+*.jar
+!.mvn/wrapper/*.jar
+
+# Logs
+logs/
+*.log
+
+# Temporaires
+tmp/
+temp/
