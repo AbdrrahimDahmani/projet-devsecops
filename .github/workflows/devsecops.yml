@@ -132,8 +132,11 @@ jobs:
         with:
           name: owasp-reports
           path: |
-            */target/dependency-check-report.html
+            api-gateway/target/dependency-check-report.html
+            order-service/target/dependency-check-report.html
+            product-service/target/dependency-check-report.html
           retention-days: 5
+          if-no-files-found: warn
 
   # ==================== SONARQUBE ANALYSIS ====================
   sonarqube-analysis:
@@ -326,6 +329,7 @@ jobs:
     steps:
       - name: Download OWASP reports
         uses: actions/download-artifact@v4
+        id: owasp-download
         with:
           name: owasp-reports
           path: owasp-reports
@@ -340,14 +344,25 @@ jobs:
           echo "| Security Tool | Status |" >> $GITHUB_STEP_SUMMARY
           echo "|---------------|--------|" >> $GITHUB_STEP_SUMMARY
           echo "| ✅ Build & Test | Completed |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🔍 OWASP Dependency Check | Completed |" >> $GITHUB_STEP_SUMMARY
+          
+          # Check if OWASP reports exist
+          if [ "${{ steps.owasp-download.outcome }}" == "success" ]; then
+            echo "| 🔍 OWASP Dependency Check | ✅ Completed |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| 🔍 OWASP Dependency Check | ⚠️ No reports (NVD API issue) |" >> $GITHUB_STEP_SUMMARY
+          fi
+          
           echo "| 📊 SonarQube Analysis | ${{ needs.sonarqube-analysis.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| 🐳 Docker Image Build | Completed |" >> $GITHUB_STEP_SUMMARY
           echo "| 🛡️ Trivy Security Scan | ${{ needs.trivy-security-scan.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 📋 Artifacts" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- OWASP Dependency Check reports available in artifacts" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.owasp-download.outcome }}" == "success" ]; then
+            echo "- ✅ OWASP Dependency Check reports available in artifacts" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⚠️ OWASP reports not available (NVD API may need time to activate)" >> $GITHUB_STEP_SUMMARY
+          fi
           echo "- Trivy results uploaded to GitHub Security tab" >> $GITHUB_STEP_SUMMARY
           echo "- SonarCloud results: [View Dashboard](https://sonarcloud.io/project/overview?id=AbdrrahimDahmani_projet-devsecops)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
